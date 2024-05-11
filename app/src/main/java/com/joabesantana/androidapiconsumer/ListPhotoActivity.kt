@@ -27,12 +27,12 @@ class ListPhotoActivity : AppCompatActivity() {
         val photoService = RetrofitClient.createService(IPhotoService::class.java)
         val call = photoService.fetchPhotos()
         val context : Context  = this
-        call.enqueue(object : Callback<List<Photo>>{
-            override fun onResponse(call: Call<List<Photo>>, response: Response<List<Photo>>) {
+        call.enqueue(object : Callback<Results>{
+            override fun onResponse(call: Call<Results>, response: Response<Results>) {
                 if (response.isSuccessful) {
-                    val photos = response.body()
-                    if (photos != null) {
-                        adapter = PhotoAdapter(context, photos)
+                    val results = response.body()
+                    if (results != null) {
+                        adapter = PhotoAdapter(context, results.results)
                         gridView.adapter = adapter
                         adapter.notifyDataSetChanged()
                     }
@@ -41,7 +41,7 @@ class ListPhotoActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Photo>>, t: Throwable) {
+            override fun onFailure(call: Call<Results>, t: Throwable) {
                 println("Erro ao buscar as fotos ${t.message}")
             }
 

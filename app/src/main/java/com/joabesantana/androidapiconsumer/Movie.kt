@@ -1,9 +1,7 @@
 package com.joabesantana.androidapiconsumer
 
-class Photo (
-    val albumId: Int,
+class Movie (
     val id: Int,
     val title: String,
-    val url: String,
-    val thumbnailUrl: String
+    val poster_path: String,
 )
