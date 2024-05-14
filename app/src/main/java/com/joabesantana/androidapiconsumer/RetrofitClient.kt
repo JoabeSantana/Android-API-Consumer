@@ -18,10 +18,6 @@ class RetrofitClient {
             return INSTANCE
         }
 
-//        fun createPhotoService(): IPhotoService {
-//            return getRetrofitInstance().create(IPhotoService::class.java)
-//        }
-
         fun <T> createService(service: Class<T>): T {
             return getRetrofitInstance().create(service)
         }

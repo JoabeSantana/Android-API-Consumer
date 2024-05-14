@@ -10,31 +10,28 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 
 
-class PhotoAdapter(context: Context, movies: List<Movie>) :
+class MovieAdapter(context: Context, movies: List<Movie>) :
     ArrayAdapter<Movie?>(context, 0, movies) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         var itemListView = convertView
         if (itemListView == null) {
-            itemListView = LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false)
+            itemListView = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
         }
 
         val movie: Movie? = getItem(position)
 
-        val titleTextView: TextView = itemListView!!.findViewById(R.id.titleTextView)
+        val countTextView: TextView = itemListView!!.findViewById(R.id.voteCountTextView)
         val imageView: ImageView = itemListView.findViewById(R.id.imageView)
 
-        titleTextView.text = movie!!.title
+        countTextView.text = "${movie!!.vote_count.toString()} Ratings"
         Glide.with(context).load(getUrl(movie!!.poster_path)).centerCrop().into(imageView)
 
-        itemListView.setOnClickListener {
-            println("${movie.title}")
-        }
         return itemListView
     }
 
-    private fun getUrl(path: String) : String {
+    private fun getUrl(path: String): String {
         return "https://image.tmdb.org/t/p/w500$path"
     }
 }
