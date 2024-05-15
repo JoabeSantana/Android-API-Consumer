@@ -1,4 +1,4 @@
-package com.joabesantana.androidapiconsumer
+package com.joabesantana.androidapiconsumer.services
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -10,7 +10,7 @@ class RetrofitClient {
         private const val BASE_URL = "https://api.themoviedb.org"
 
         private fun getRetrofitInstance(): Retrofit {
-            if (!::INSTANCE.isInitialized) {
+            if (!Companion::INSTANCE.isInitialized) {
                 val http = OkHttpClient.Builder()
                 INSTANCE = Retrofit.Builder().baseUrl(BASE_URL).client(http.build())
                     .addConverterFactory(GsonConverterFactory.create()).build()

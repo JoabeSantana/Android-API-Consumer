@@ -1,9 +1,9 @@
-package com.joabesantana.androidapiconsumer
+package com.joabesantana.androidapiconsumer.services
 
+import com.joabesantana.androidapiconsumer.model.Results
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
 interface IMovieService {

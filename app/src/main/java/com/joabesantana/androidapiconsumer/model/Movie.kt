@@ -1,6 +1,6 @@
-package com.joabesantana.androidapiconsumer
+package com.joabesantana.androidapiconsumer.model
 
-class Movie(
+data class Movie(
     val id: Int,
     val title: String,
     val poster_path: String,

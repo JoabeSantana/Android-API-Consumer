@@ -2,17 +2,18 @@ package com.joabesantana.androidapiconsumer.ui.movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.joabesantana.androidapiconsumer.IMovieService
-import com.joabesantana.androidapiconsumer.Movie
-import com.joabesantana.androidapiconsumer.Results
-import com.joabesantana.androidapiconsumer.RetrofitClient
+import com.joabesantana.androidapiconsumer.services.IMovieService
+import com.joabesantana.androidapiconsumer.model.Movie
+import com.joabesantana.androidapiconsumer.model.Results
+import com.joabesantana.androidapiconsumer.services.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class MovieListViewModel: ViewModel() {
-    val movieListLiveData = MutableLiveData<MutableList<Movie>>()
+class MovieListViewModel : ViewModel() {
+
+    private var movieListLiveData = MutableLiveData<MutableList<Movie>>()
 
     fun fetchMovies(page: Int, concatResults: Boolean) {
         val photoService = RetrofitClient.createService(IMovieService::class.java)
@@ -27,7 +28,7 @@ class MovieListViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val movieResults = response.body()
                     if (movieResults != null) {
-                        if(concatResults && movieListLiveData.value != null){
+                        if (concatResults && movieListLiveData.value != null) {
                             val results: MutableList<Movie> = ArrayList()
                             results.addAll(movieListLiveData.value!!)
                             results.addAll(movieResults.results)
@@ -45,5 +46,9 @@ class MovieListViewModel: ViewModel() {
                 println("Error to fetch Movies: ${t.message}")
             }
         })
+    }
+
+    fun getMovieListLiveData(): MutableLiveData<MutableList<Movie>> {
+        return movieListLiveData
     }
 }
