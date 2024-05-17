@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageDogView"
+        android:id="@+id/imgDogView"
         android:layout_width="match_parent"
         android:layout_height="200sp" />
 

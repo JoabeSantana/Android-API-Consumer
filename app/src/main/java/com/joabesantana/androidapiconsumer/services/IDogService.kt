@@ -12,6 +12,6 @@ interface IDogService {
         "Content-Type: application/json",
         "x-api-key: live_dmpsGnerefTPjX2XGbKpxZ4zzHdefPoDZ5HPdoKi0qiQ5JtUfLtf6Py2xCCs4yxA"
     )
-    @GET("/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=10")
-    fun fetchDogs(): Call<MutableList<Dog>>
+    @GET("/v1/images/search")
+    fun fetchDogs(@QueryMap params: Map<String, String>): Call<MutableList<Dog>>
 }

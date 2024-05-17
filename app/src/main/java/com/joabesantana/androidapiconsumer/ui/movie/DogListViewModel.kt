@@ -15,15 +15,27 @@ class DogListViewModel : ViewModel() {
 
     private var dogListLiveData = MutableLiveData<MutableList<Dog>>()
 
-    fun fetchDogs(concatResults: Boolean) {
+    fun fetchDogs(page: Int, concatResults: Boolean) {
 
         val dogService = RetrofitDogClient.createService(IDogService::class.java)
 
-        val call = dogService.fetchDogs()
+        val params: Map<String, String> = mapOf(
+            "size" to "med",
+            "mime_types" to "jpg",
+            "format" to "json",
+            "has_breeds" to "true",
+            "order" to "RANDOM",
+            "page" to page.toString(),
+            "limit" to "10"
+        )
+
+        val call = dogService.fetchDogs(params)
 
         call.enqueue(object : Callback<MutableList<Dog>> {
 
-            override fun onResponse(call: Call<MutableList<Dog>>, response: Response<MutableList<Dog>>) {
+            override fun onResponse(
+                call: Call<MutableList<Dog>>, response: Response<MutableList<Dog>>
+            ) {
                 if (response.isSuccessful) {
                     val dogsResults = response.body()
                     if (dogsResults != null) {

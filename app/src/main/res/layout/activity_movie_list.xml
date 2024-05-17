@@ -9,7 +9,7 @@
 
     <GridView
         android:id="@+id/idGridViewPhotos"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llLoadMore"
         android:layout_alignParentTop="true"
@@ -31,7 +31,7 @@
             android:id="@+id/btLoadMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Load More" />
+            android:text="Load More Cute Dogs" />
     </LinearLayout>
 
 

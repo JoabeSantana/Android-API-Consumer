@@ -58,21 +58,21 @@ class MovieListActivity : AppCompatActivity() {
 
         dogViewModel = ViewModelProvider(this).get(DogListViewModel::class.java)
 
-        dogViewModel.fetchDogs(false)
+        dogViewModel.fetchDogs(++page, false)
 
         dogViewModel.getDogListLiveData().observe(this, Observer { dogsList ->
             if (dogsList != null) {
                 dogAdapter = DogAdapter(this, dogsList)
                 gridView.adapter = dogAdapter
                 dogAdapter.notifyDataSetChanged()
-                if(dogsList.size > 10){
+                if (page > 1) {
                     gridView.setSelection(dogsList.size)
                 }
             }
         })
 
         binding.btLoadMore.setOnClickListener {
-            dogViewModel.fetchDogs(true)
+            dogViewModel.fetchDogs(++page,true)
         }
     }
 }

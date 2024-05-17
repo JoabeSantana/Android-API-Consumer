@@ -20,21 +20,17 @@ import com.joabesantana.androidapiconsumer.model.Dog
 
 class DogAdapter(context: Context, dogs: List<Dog>) : ArrayAdapter<Dog?>(context, 0, dogs) {
 
-    private lateinit var binding: ItemDogBinding
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-        binding = ItemDogBinding.inflate(LayoutInflater.from(parent.context))
 
         var itemListView = convertView
         if (itemListView == null) {
-            itemListView = binding.root
+            itemListView = ItemDogBinding.inflate(LayoutInflater.from(parent.context)).root
         }
 
         val dog: Dog? = getItem(position)
 
-        val breedTextView: TextView = binding.breedTextView
-        val imageView: ImageView = binding.imageDogView
+        val breedTextView: TextView = itemListView.findViewById(R.id.breedTextView)
+        val imageView: ImageView = itemListView.findViewById(R.id.imgDogView)
 
         breedTextView.text = dog!!.breeds.first().name
         Glide.with(context).load(dog!!.url).centerCrop().into(imageView)
